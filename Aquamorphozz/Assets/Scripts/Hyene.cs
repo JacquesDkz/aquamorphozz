@@ -15,7 +15,9 @@ public class Hyene : MonoBehaviour
 
     private int i = 1000;
 
-    private int anim = 0;
+    private bool col = false;
+
+    private bool b = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +28,15 @@ public class Hyene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!animator.GetBool("Combat"))
+        if(!b && !col)
         {
+            if(walkSpeed < 0)
+            {
+                transform.rotation = new Quaternion(0,0,0,0);
+            }
+            else{
+                transform.rotation = new Quaternion(0,180,0,0);
+            }
             if(i == 1000)
             {
                 if(x + walkSpeed * Time.deltaTime < tailleDeplacement && x + walkSpeed * Time.deltaTime > -tailleDeplacement)
@@ -58,8 +67,8 @@ public class Hyene : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Perso"))
         {
-            anim++;
             animator.SetBool("Combat", true);
+            animator.SetBool("walk", false);
             if(other.gameObject.transform.position.x < transform.position.x)
             {
                 transform.rotation = new Quaternion(0,0,0,0);
@@ -67,23 +76,26 @@ public class Hyene : MonoBehaviour
             else{
                 transform.rotation = new Quaternion(0,180,0,0);
             }
-            StartCoroutine(wait(anim));
+            if(!b)
+                StartCoroutine(wait());
+            col = true;
         }
     }
 
-    IEnumerator wait(int i)
+    private void OnCollisionExit2D(Collision2D other)
     {
+        col = false;
+    }
+
+    IEnumerator wait()
+    {
+        b = true;
         yield return new WaitForSeconds((float)1);
-        if(anim == i)
+        animator.SetBool("Combat", false);
+        if(col)
         {
-            animator.SetBool("Combat", false);
-            if(walkSpeed < 0)
-            {
-                transform.rotation = new Quaternion(0,0,0,0);
-            }
-            else{
-                transform.rotation = new Quaternion(0,180,0,0);
-            }
+            Debug.Log("Hit");
         }
+        b = false;
     }
 }
