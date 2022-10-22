@@ -7,7 +7,7 @@ public class Hyene : MonoBehaviour
 {
     public float tailleDeplacement;
 
-    Animator animator;
+    private Animator animator;
 
     public float walkSpeed;
 

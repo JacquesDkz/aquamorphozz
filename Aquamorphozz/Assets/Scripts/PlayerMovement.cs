@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
     private float horizontalMovement;
+    private bool active = false;
 
 
 
@@ -34,26 +35,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
-
-        horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if(active)
         {
-            isJumping = true;
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, collisionLayers);
+
+            horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                isJumping = true;
+            }
+
+            Flip(rb.velocity.x);
+
+            float characterVelocity = Mathf.Abs(rb.velocity.x);
+            animator.SetFloat("Speed", characterVelocity);
         }
-
-        Flip(rb.velocity.x);
-
-        float characterVelocity = Mathf.Abs(rb.velocity.x);
-        animator.SetFloat("Speed", characterVelocity);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
-        MovePlayer(horizontalMovement);
+        if(active)
+            MovePlayer(horizontalMovement);
     }
 
     void MovePlayer(float _horizontalMovement)
@@ -79,5 +83,10 @@ public class PlayerMovement : MonoBehaviour
         {
             spriteRenderer.flipX = true;
         }
+    }
+
+    public void ChangeActive()
+    {
+        active = !active;
     }
 }

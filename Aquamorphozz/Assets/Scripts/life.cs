@@ -15,7 +15,7 @@ public class life : MonoBehaviour
         for(int i = 0; i < p.nbCoeur; i++)
         {
             GameObject g = Instantiate(coeur, transform);
-            g.transform.Translate(-i, 0, 0);
+            g.transform.Translate(-i, 0, 5);
             coeurs.Push(g);
             nb++;
         }
