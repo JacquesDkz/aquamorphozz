@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = false;
 
         }
-        else if(_velocity < 0.1f)
+        else if(_velocity < -0.1f)
         {
             spriteRenderer.flipX = true;
         }
