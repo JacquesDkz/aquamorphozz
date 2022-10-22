@@ -77,7 +77,7 @@ public class Hyene : MonoBehaviour
                 transform.rotation = new Quaternion(0,180,0,0);
             }
             if(!b)
-                StartCoroutine(wait());
+                StartCoroutine(wait(other.gameObject));
             col = true;
         }
     }
@@ -87,14 +87,14 @@ public class Hyene : MonoBehaviour
         col = false;
     }
 
-    IEnumerator wait()
+    IEnumerator wait(GameObject g)
     {
         b = true;
         yield return new WaitForSeconds((float)1);
         animator.SetBool("Combat", false);
         if(col)
         {
-            Debug.Log("Hit");
+            g.GetComponent<Player>().nbCoeur--;
         }
         b = false;
     }
