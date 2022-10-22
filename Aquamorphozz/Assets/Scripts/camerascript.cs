@@ -12,6 +12,7 @@ public class camerascript : MonoBehaviour
     private int posCam = 0;
     private Vector3 posCamSousMarin;
     private Vector3 posCamSubMarin;
+    private bool clicked = false;
     //private float moveSpeed = 0.1f;
     //private float scrollSpeed = 10f;
 
@@ -26,8 +27,9 @@ public class camerascript : MonoBehaviour
     void Update()
     {   
 
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
+        if (Input.GetKey(KeyCode.UpArrow) && !clicked)
+        {   
+            clicked = true;
             posCam = (posCam + 1) % 2;
 
             switch (posCam)
@@ -40,19 +42,25 @@ public class camerascript : MonoBehaviour
                 case 1:
                     transform.position = posCamSousMarin;
                     break;
+
                 
             }
 
             Player.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, Player.transform.position.z);
         }
         else
-        {
+        {   
             px = Player.transform.position.x;
             py = Player.transform.position.y;
             cz = cam.transform.position.z;
 
             transform.position = new Vector3(px, py, cz);
 
+        }
+
+        if (!Input.GetKey(KeyCode.UpArrow))
+        {
+            clicked = false;
         }
 
         /*cam.transform.position.x = px;
