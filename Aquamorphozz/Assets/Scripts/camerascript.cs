@@ -42,8 +42,7 @@ public class camerascript : MonoBehaviour
                 case 1:
                     transform.position = posCamSousMarin;
                     break;
-
-                
+ 
             }
 
             Player.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, Player.transform.position.z);
