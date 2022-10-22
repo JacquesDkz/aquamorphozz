@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3187220633883019812}
   - component: {fileID: 3187220633883019811}
-  - component: {fileID: 3187220633883019810}
   - component: {fileID: 3187220633883019808}
   - component: {fileID: 3187220633883019871}
+  - component: {fileID: -6040719849454780671}
   m_Layer: 0
   m_Name: Hyene
   m_TagString: Untagged
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &3187220633883019810
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3187220633883019870}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.06, y: -0.1}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.48, y: 0.48}
-    newSize: {x: 0.48, y: 0.48}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.36, y: 0.28}
-  m_EdgeRadius: 0
 --- !u!95 &3187220633883019808
 Animator:
   serializedVersion: 4
@@ -147,3 +121,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tailleDeplacement: 7
   walkSpeed: 2
+--- !u!60 &-6040719849454780671
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187220633883019870}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.48, y: 0.48}
+    newSize: {x: 0.48, y: 0.48}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.22508895, y: -0.20711899}
+      - {x: 0.19912812, y: -0.14987169}
+      - {x: 0.18201798, y: -0.08898015}
+      - {x: 0.16478008, y: -0.071567096}
+      - {x: 0.054854967, y: -0.034260474}
+      - {x: 0.01578499, y: -0.017988624}
+      - {x: -0.00932367, y: 0.04589626}
+      - {x: -0.0827621, y: 0.04589626}
+      - {x: -0.09536046, y: 0.0006706789}
+      - {x: -0.1227621, y: 0.0002254434}
+      - {x: -0.12041805, y: -0.047194097}
+      - {x: -0.09298754, y: -0.073359594}
+      - {x: -0.05646825, y: -0.14812407}
+      - {x: -0.06525683, y: -0.24}
+      - {x: 0.18767905, y: -0.23883764}
+      - {x: 0.22276212, y: -0.22746332}
