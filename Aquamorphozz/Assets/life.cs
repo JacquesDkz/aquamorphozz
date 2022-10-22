@@ -14,7 +14,9 @@ public class life : MonoBehaviour
         coeurs = new Stack<GameObject>();
         for(int i = 0; i < p.nbCoeur; i++)
         {
-            coeurs.Push(Instantiate(coeur, new Vector3(-i + (float)9.42, (float)4.44, 0), new Quaternion(0,0,0,0), transform));
+            GameObject g = Instantiate(coeur, transform);
+            g.transform.Translate(-i, 0, 0);
+            coeurs.Push(g);
             nb++;
         }
     }
