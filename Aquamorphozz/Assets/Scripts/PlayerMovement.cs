@@ -8,7 +8,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping;
     private bool isGrounded;
 
-    //public Transform groundCheck;
+    public Transform groundCheckLeft;
+    public Transform groundCheckRight;
 
     public Rigidbody2D rb;
     public Animator animator;
@@ -25,9 +26,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //isGrounded = Physics2D.OverlapCircle(groundCheck.position);
+        isGrounded = Physics2D.OverlapArea(groundCheckLeft.position, groundCheckRight.position);
 
-        float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed - Time.deltaTime;
+        float horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
 
         if (Input.GetButtonDown("Jump") && (isGrounded == true))
         {
