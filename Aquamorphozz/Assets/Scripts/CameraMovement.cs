@@ -8,7 +8,9 @@ public class CameraMovement : MonoBehaviour
 
     //Variable qui contient le personnage sur lequel la caméra doit se centrer
     //Pour l'affectation dans Unity, on mettra le personnage dont on voudra qu'il soit suivi au début du jeu
-    public GameObject perso;
+    public GameObject player;
+    public GameObject hyene;
+    private GameObject persoCourant;
 
     public float timeOffset;
     public Vector3 posOffset;
@@ -18,27 +20,41 @@ public class CameraMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        persoCourant = player;
     }
 
     // Update is called once per frame
     void Update()
     {
-        centrerCameraSurPerso();
+        centrerCameraSur(persoCourant);
+
+        //Exemple avec un changement de camera sur la hyène si 'tab' est pressé
+        if (Input.GetKey(KeyCode.Tab) && (persoCourant == player))
+        {
+            changerPersoCourant(hyene);
+
+        }
+        print(persoCourant == hyene);
+        print(persoCourant == player);
+
+        if (Input.GetKey(KeyCode.Tab) && (persoCourant == hyene))
+        {
+            changerPersoCourant(player);
+        }
+
 
     }
 
-
-    /*Méthode qui suit le personnage courant dans le jeu*/
-    void centrerCameraSurPerso()
+    /*Méthode qui suit le gameobject perso dans le jeu*/
+    void centrerCameraSur(GameObject perso)
     {
         self.transform.position = Vector3.SmoothDamp(self.transform.position, perso.transform.position + posOffset, ref velocity, timeOffset);
     }
 
     /*Méthode à appeler pour changer le personnage à focus*/
-    void changerPersoCourant(GameObject nouveau_perso)
+    void changerPersoCourant(GameObject persoSuivant)
     {
-        perso = nouveau_perso;
+        persoCourant = persoSuivant;
     }
 
     void OnKeyDown(KeyDownEvent ev)
