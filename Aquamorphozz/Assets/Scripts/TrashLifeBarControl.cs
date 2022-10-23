@@ -1,10 +1,10 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class life : MonoBehaviour
+public class TrashLifeBarControl : MonoBehaviour
 {
-    public Player p;
+    public PlayerLife p;
     public GameObject coeur;
     private Stack<GameObject> coeurs;
     private int nb = 0;
@@ -33,3 +33,4 @@ public class life : MonoBehaviour
 
     
 }
+*/

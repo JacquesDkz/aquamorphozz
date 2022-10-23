@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Hyene : MonoBehaviour
+public class HyeneMovement : MonoBehaviour
 {
     public float tailleDeplacement;
 
@@ -92,10 +92,12 @@ public class Hyene : MonoBehaviour
         b = true;
         yield return new WaitForSeconds((float)1);
         animator.SetBool("Combat", false);
+        /*
         if(col)
         {
-            g.GetComponent<Player>().nbCoeur--;
+            g.GetComponent<PlayerLife>().nbCoeur--;
         }
         b = false;
+        */
     }
 }
