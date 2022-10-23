@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     //Pour l'affectation dans Unity, on mettra le personnage dont on voudra qu'il soit suivi au début du jeu
     public GameObject player;
     public GameObject hyene;
+    private int idPerso;
     private GameObject persoCourant;
 
     public float timeOffset;
@@ -17,10 +16,16 @@ public class CameraMovement : MonoBehaviour
 
     private Vector3 velocity;
 
+    private float lastTimeEventWereCalled;
+    private float currentTimeEventIsCalled;
+    private static float minTimeBetweenEvents = 0.2f;
+
     // Start is called before the first frame update
     void Start()
     {
         persoCourant = player;
+        idPerso = 0;
+        lastTimeEventWereCalled = Time.realtimeSinceStartup;
     }
 
     // Update is called once per frame
@@ -29,17 +34,37 @@ public class CameraMovement : MonoBehaviour
         centrerCameraSur(persoCourant);
 
         //Exemple avec un changement de camera sur la hyène si 'tab' est pressé
-        if (Input.GetKey(KeyCode.Tab) && (persoCourant == player))
-        {
-            changerPersoCourant(hyene);
 
-        }
-        print(persoCourant == hyene);
-        print(persoCourant == player);
+        currentTimeEventIsCalled = Time.realtimeSinceStartup;
+        
+        if (Input.GetKey(KeyCode.Tab) && (currentTimeEventIsCalled - lastTimeEventWereCalled > minTimeBetweenEvents))
+        {   
+            //print(currentTimeEventIsCalled);
+            lastTimeEventWereCalled = currentTimeEventIsCalled;
 
-        if (Input.GetKey(KeyCode.Tab) && (persoCourant == hyene))
-        {
-            changerPersoCourant(player);
+            if (idPerso == 0)
+            {
+                idPerso = 1;
+                changerPersoCourant(hyene);
+            }
+            else if (idPerso == 1)
+            {
+                idPerso = 0;
+                changerPersoCourant(player);
+            }
+
+            /*if ( persoCourant == player)
+            {
+                
+
+            }
+            //print(persoCourant == hyene);
+            print(persoCourant == player);
+
+            if (persoCourant == hyene)
+            {
+                changerPersoCourant(player);
+            }*/
         }
 
 
@@ -49,6 +74,7 @@ public class CameraMovement : MonoBehaviour
     void centrerCameraSur(GameObject perso)
     {
         self.transform.position = Vector3.SmoothDamp(self.transform.position, perso.transform.position + posOffset, ref velocity, timeOffset);
+        //print(perso.transform.position);
     }
 
     /*Méthode à appeler pour changer le personnage à focus*/
@@ -57,10 +83,4 @@ public class CameraMovement : MonoBehaviour
         persoCourant = persoSuivant;
     }
 
-    void OnKeyDown(KeyDownEvent ev)
-    {
-        print("KeyDown:" + ev.keyCode);
-        print("KeyDown:" + ev.character);
-        print("KeyDown:" + ev.modifiers);
-    }
 }

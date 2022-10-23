@@ -18,6 +18,8 @@ public class HyeneMovement : MonoBehaviour
     private bool col = false;
 
     private bool b = false;
+
+    private float coord_x, coord_y, coord_z;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +45,14 @@ public class HyeneMovement : MonoBehaviour
                 {
                     animator.SetBool("walk", true);
                     x += walkSpeed * Time.deltaTime;
+                    /*coord_x = transform.position.x + (-1*Math.Abs(walkSpeed) * Time.deltaTime);
+                    coord_y = transform.position.y;
+                    coord_z = transform.position.z;
+                    transform.position = new Vector3(coord_x, coord_y, coord_z);*/
+
+                    print(transform.position);
                     transform.Translate(-1*Math.Abs(walkSpeed) * Time.deltaTime, 0, 0);
+                    print(transform.position);
                 }
                 else
                 {
