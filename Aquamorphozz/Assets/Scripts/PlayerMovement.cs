@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private float horizontalMovement;
 
+    private bool active = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
         horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
 
-        if (Input.GetButtonDown("Jump") && (isGrounded == true))
+        if (active && Input.GetButtonDown("Jump") && (isGrounded == true))
         {
             isJumping = true;
         }
@@ -50,15 +52,19 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void MovePlayer(float _horizontalMovement)
-    {
-        Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
-        rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
-
-        if (isJumping == true)
+    {   
+        if (active)
         {
-            rb.AddForce(new Vector2(0f, jumpforce));
-            isJumping = false;
+            Vector3 targetVelocity = new Vector2(_horizontalMovement, rb.velocity.y);
+            rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref velocity, .05f);
+
+            if (isJumping == true)
+            {
+                rb.AddForce(new Vector2(0f, jumpforce));
+                isJumping = false;
+            }
         }
+        
     }
 
     void Flip(float _velocity)
@@ -78,5 +84,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+    }
+
+    /*Permet d'activer ou de desactiver le fait que le joueur puisse se déplacer quand on appuie sur un bouton*/
+    public void changeActive()
+    {
+        active = !active;
     }
 }

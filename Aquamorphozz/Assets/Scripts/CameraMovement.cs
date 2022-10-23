@@ -8,6 +8,9 @@ public class CameraMovement : MonoBehaviour
     //Pour l'affectation dans Unity, on mettra le personnage dont on voudra qu'il soit suivi au début du jeu
     public GameObject player;
     public GameObject hyene;
+    public GameObject poisson;
+
+
     private int idPerso;
     private GameObject persoCourant;
 
@@ -42,29 +45,26 @@ public class CameraMovement : MonoBehaviour
             //print(currentTimeEventIsCalled);
             lastTimeEventWereCalled = currentTimeEventIsCalled;
 
-            if (idPerso == 0)
-            {
-                idPerso = 1;
-                changerPersoCourant(hyene);
-            }
-            else if (idPerso == 1)
-            {
-                idPerso = 0;
-                changerPersoCourant(player);
+            switch (idPerso)
+            {   
+
+                case 0:
+                    changerPersoCourant(hyene);
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().changeActive();
+                    
+                    break;
+                case 1:
+                    changerPersoCourant(poisson);
+                    GameObject.Find("Poisson").GetComponent<PoissonMovement>().changeActive();
+                    break;
+                case 2:
+                    changerPersoCourant(player);
+                    GameObject.Find("Poisson").GetComponent<PoissonMovement>().changeActive();
+                    GameObject.Find("Player").GetComponent<PlayerMovement>().changeActive();
+                    break;
             }
 
-            /*if ( persoCourant == player)
-            {
-                
-
-            }
-            //print(persoCourant == hyene);
-            print(persoCourant == player);
-
-            if (persoCourant == hyene)
-            {
-                changerPersoCourant(player);
-            }*/
+            idPerso = (idPerso + 1) % 3;
         }
 
 

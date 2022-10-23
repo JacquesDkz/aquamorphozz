@@ -98,9 +98,8 @@ public class PoissonMovement : MonoBehaviour
         animator.SetBool("Bas", false);
     }
 
-    public void ChangeActive()
+    public void changeActive()
     {
         active = !active;
-        Debug.Log("coucou");
     }
 }
